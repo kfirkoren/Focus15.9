@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>מוקאפ – טופס שאלה-במסך</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="loader-box">
+        <div class="powered">Powered by</div>
+        <!-- החלף לנתיב הלוגו שלך או השאר טקסט -->
+        <img class="logo" src="png/Logo2.png" alt="Your Brand Logo" />
+        <div class="loader"></div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="head">
+        <div class="title">שאלון בריף – שאלה אחת בכל מסך</div>
+        <div class="progress">
+          <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+          <b class="count" id="counter">1 / 5</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- פאנלי השאלות -->
+    <div class="qflow" id="qflow">
+      <!-- Q0: נשאר כמו שהיה -->
+      <section class="q classic">
+        <div class="qbox">
+          <div class="title">שאלון בריף – שאלה אחת בכל מסך</div>
+          <p class="muted">
+            השאלון לוקח כ-8–12 דקות. בכל שלב תמלא/י מעט שדות ותוכל/י לנווט
+            קדימה/אחורה. הנתונים נשמרים מקומית כדי שלא תאבד/י התקדמות.
+          </p>
+
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/lpEeYwrkBPU?rel=0&controls=1&modestbranding=1"
+              title="Intro video"
+              frameborder="0"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q1: נשאר כמו שהיה -->
+      <section class="q classic">
+        <div class="qbox">
+          <div class="field" data-req>
+            <div class="label">שם מלא <span class="req">*</span></div>
+            <input type="text" name="full_name" placeholder="ישראל ישראלי" />
+            <div class="error">נא למלא שם</div>
+          </div>
+          <div class="field" data-req>
+            <div class="label">אימייל <span class="req">*</span></div>
+            <input type="email" name="email" placeholder="name@example.com" />
+            <div class="error">נא למלא אימייל תקין</div>
+          </div>
+          <div class="field" data-req>
+            <div class="label">טלפון <span class="req">*</span></div>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="050-234-5678"
+              inputmode="tel"
+            />
+            <div class="error">טלפון לא תקין</div>
+          </div>
+          <div class="hint">גלול/י קלות למטה כדי לעבור לשאלה הבאה</div>
+        </div>
+      </section>
+      <!-- Q1: רקע על המותג -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">ספר/י בקצרה על המותג – מתי נפתח, מה הוא בא לפתור?</h2>
+          <div class="fieldline">
+            <textarea
+              name="brand_background"
+              rows="5"
+              placeholder="לדוגמה: נפתח ב־2020 כדי לפתור... קהל יעד, בידול, ערך ייחודי."
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא רקע</div>
+        </div>
+      </section>
+
+      <!-- Q2: SWOT – עוצמות -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">SWOT – עוצמות: מה אנחנו עושים טוב במיוחד?</h2>
+          <div class="fieldline">
+            <textarea
+              name="swot_strengths"
+              rows="5"
+              placeholder="לדוגמה:
+• שירות אישי ומהיר
+• איכות מוצר גבוהה
+• תמחור תחרותי
+• קהילת לקוחות נאמנה"
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא עוצמות</div>
+        </div>
+      </section>
+
+      <!-- Q3: SWOT – חולשות -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">SWOT – חולשות: איפה קיימים פערים או חסרונות?</h2>
+          <div class="fieldline">
+            <textarea
+              name="swot_weaknesses"
+              rows="5"
+              placeholder="לדוגמה:
+• מחסור בכוח אדם/ידע
+• תקציב שיווק מוגבל
+• תהליכים פנימיים איטיים"
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא חולשות</div>
+        </div>
+      </section>
+
+      <!-- Q4: SWOT – הזדמנויות -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">
+            SWOT – הזדמנויות: אילו מגמות או נישות פותחות אפשרות לצמיחה?
+          </h2>
+          <div class="fieldline">
+            <textarea
+              name="swot_opportunities"
+              rows="5"
+              placeholder="לדוגמה:
+• מגמת קיימות/AI
+• נישה לא מטופלת
+• שיתופי פעולה אסטרטגיים"
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא הזדמנויות</div>
+        </div>
+      </section>
+
+      <!-- Q5: SWOT – סיכונים -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">
+            SWOT – סיכונים: אילו מתחרים, רגולציות או גורמים חיצוניים עלולים
+            לפגוע בנו?
+          </h2>
+          <div class="fieldline">
+            <textarea
+              name="swot_threats"
+              rows="5"
+              placeholder="לדוגמה:
+• מתחרה בינלאומי חזק
+• רגולציה מחמירה
+• ירידה בביקוש עקב מצב השוק"
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא סיכונים</div>
+        </div>
+      </section>
+
+      <!-- Q6: מתחרים (רשימה עם URL) -->
+
+      <!-- Q7: Having -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">Having – אילו נכסים, הצלחות או הישגים כבר השגנו?</h2>
+          <div class="fieldline">
+            <textarea
+              name="vision_having"
+              rows="5"
+              placeholder="לדוגמה: 100+ לקוחות פעילים, קו מוצרים חדש, פרסי חדשנות..."
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא הישגים</div>
+        </div>
+      </section>
+
+      <!-- Q8: Being -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">Being – איך אנחנו מרגישים בעקבות הדרך שעברנו?</h2>
+          <div class="fieldline">
+            <textarea
+              name="vision_being"
+              rows="4"
+              placeholder="לדוגמה: גאווה, תחושת משמעות, דרייב לצמיחה..."
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא תחושות</div>
+        </div>
+      </section>
+
+      <!-- Q9: Doing -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">Doing – אילו פעילויות אנחנו עושים בפועל היום?</h2>
+          <div class="fieldline">
+            <textarea
+              name="vision_doing"
+              rows="5"
+              placeholder="לדוגמה: יצירת תוכן, פיתוח מוצר, שיתופי פעולה, מכירות..."
+            ></textarea>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא פעילויות</div>
+        </div>
+      </section>
+
+      <!-- Q10: מטרה שיווקית (עם datalist אופציונלי) -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">מהי המטרה השיווקית המרכזית שלנו?</h2>
+          <div class="fieldline">
+            <input
+              type="text"
+              name="marketing_goal"
+              list="goalsList"
+              placeholder="לדוגמה: להגדיל מכירות ב־20% בשנה הקרובה"
+            />
+            <datalist id="goalsList">
+              <option value="הגדלת הכנסות/מכירות"></option>
+              <option value="הגדלת לידים איכותיים"></option>
+              <option value="העלאת מודעות למותג"></option>
+              <option value="כניסה לשוק/נישה חדשה"></option>
+              <option value="שיפור המרות באתר"></option>
+              <option value="שימור לקוחות והגדלת LTV"></option>
+            </datalist>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">אפשר לחזור למעלה עם גלילה קצרה למעלה</div>
+          <div class="error">נא למלא מטרה</div>
+        </div>
+      </section>
+
+      <!-- Q11: מסר עיקרי (מד תווים) -->
+      <section class="q tf" data-req>
+        <div class="stage">
+          <h2 class="ask">מהו המסר העיקרי שלנו – במשפט אחד?</h2>
+          <div class="fieldline">
+            <input
+              type="text"
+              name="main_message"
+              maxlength="140"
+              placeholder="לדוגמה: אנחנו הפתרון המהיר והאמין ל־___"
+            />
+            <span class="char-hint" data-for="main_message">0/140</span>
+            <button class="ok" type="button" data-next>אוקיי</button>
+          </div>
+          <div class="meta">טיפ: מסר חד, ברור ומבדל</div>
+          <div class="error">נא למלא מסר</div>
+        </div>
+      </section>
+
+      <!-- Q12: רפרנסים/קישורים (רפיטר עם URL) -->
+
+      <!-- Q (סיום) -->
+      <section class="q tf" data-req data-no-footer>
+        <div class="stage">
+          <h2 class="ask">אישור פרטים</h2>
+          <div class="fieldline">
+            <label
+              style="display: flex; align-items: center; gap: 10px; width: 100%"
+            >
+              <input
+                type="checkbox"
+                name="consent"
+                style="width: 18px; height: 18px; accent-color: var(--primary)"
+              />
+              מאשר/ת שהפרטים נכונים
+            </label>
+            <button class="ok" type="button" id="submitBtn">שליחה</button>
+          </div>
+          <div class="meta">אפשר גם Enter לשליחה</div>
+          <div class="error">חובה לאשר</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Q-RESULT: תוצאה מהשרת -->
+    <!-- <section class="q tf" id="result-screen">
+  <div class="stage">
+    <h2 class="ask">התקבל ✔</h2>
+    <pre class="result-box" id="resultText" dir="ltr"></pre>
+    <div class="fieldline" style="border:none; padding:0; justify-content:center;">
+      <button class="ok" type="button" id="resultClose">חזרה להתחלה</button>
+    </div>
+    <div class="meta">אפשר להעתיק/להדביק את התגובה במידת הצורך</div>
+  </div>
+</section> -->
+
+    <!-- פוטר ניווט כללי -->
+    <div class="footer">
+      <button class="btn btn-ghost" id="prevBtn" type="button">חזרה</button>
+      <button class="btn btn-primary" id="nextBtn" type="button">המשך</button>
+    </div>
+
+    <!-- ===== Popup Success Template ===== -->
+    <!-- פופאפ -->
+    <div
+      id="successPopup"
+      class="popup"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="popupTitle"
+      aria-describedby="popupDesc"
+    >
+      <div class="popup-content" role="document">
+        <button class="close-btn" aria-label="סגירה">×</button>
+        <div class="success-icon" aria-hidden="true"></div>
+        <h2 id="popupTitle">נשלח בהצלחה!</h2>
+        <p id="popupDesc">הטופס שלך התקבל, תודה 🙏</p>
+      </div>
+    </div>
+
+    <script src="JavaScript.js"></script>
+  </body>
+</html>

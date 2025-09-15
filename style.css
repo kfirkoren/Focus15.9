@@ -1,0 +1,601 @@
+/* =============================================================================
+   משתנים גלובליים
+============================================================================= */
+:root {
+  color-scheme: dark;
+  --bg: #0f0f11;
+  --text: #fff;
+  --muted: #a9abb1;
+  --primary: #7c497b;
+  --danger: #ff7b7b;
+  --line: #383a40;
+  --font: "Rubik", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  /* Popup Vars */
+  --popup-accent: #7c497b;
+  --popup-bg: rgba(28, 28, 30, 0.75);
+  --popup-text: #ffffff;
+  --popup-border: rgba(255, 255, 255, 0.14);
+  --popup-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* =============================================================================
+   בסיס ומבנה עמוד
+============================================================================= */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  min-height: 100dvh;
+}
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: radial-gradient(
+      70vw 70vh at 80% -10%,
+      rgba(124, 73, 123, 0.28),
+      transparent 60%
+    ),
+    radial-gradient(
+      70vw 70vh at 10% 110%,
+      rgba(124, 73, 123, 0.18),
+      transparent 36%
+    ),
+    var(--bg);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+}
+
+/* =============================================================================
+   Header
+============================================================================= */
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px;
+  width: 100%;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 2px 12px;
+}
+.title {
+  font-weight: 700;
+}
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  max-width: 50%;
+}
+.bar {
+  position: relative;
+  height: 7px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar > span {
+  position: absolute;
+  inset-block: 0; /* גובה מלא */
+  inset-inline-start: 0; /* מתחיל מההתחלה */
+  width: 0%; /* ברירת מחדל */
+  background: var(--primary);
+  border-radius: 999px;
+  transition: width 0.35s ease; /* מעבר חלק */
+}
+
+.count {
+  font-weight: 600;
+  color: var(--muted);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* =============================================================================
+   תוכן עמוד – זרימת מסכים
+============================================================================= */
+.qflow {
+  grid-row: 2;
+  position: relative;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.q {
+  min-height: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px;
+}
+
+/* ——— מסך ראשון – קארד ——— */
+.q.classic .qbox {
+  width: 100%;
+  max-width: 760px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 16px 16px 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12);
+}
+
+/* ——— סגנון Typeform למסכים 2+ ——— */
+.q.tf .stage {
+  width: min(900px, 92vw);
+}
+.q.tf .ask {
+  font-weight: 700;
+  line-height: 1.35;
+  font-size: clamp(22px, 3.2vw, 36px);
+  text-align: center;
+  margin: 0 0 30px;
+}
+.q.tf .fieldline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #5a5a5a;
+  padding: 10px 4px 14px;
+}
+.q.tf input[type="text"],
+.q.tf input[type="email"],
+.q.tf input[type="tel"],
+.q.tf textarea,
+.q.tf select {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  width: 100%;
+  font: inherit;
+  font-size: clamp(18px, 2vw, 22px);
+}
+.q.tf input::placeholder,
+.q.tf textarea::placeholder {
+  color: #bdbdbd;
+}
+.q.tf .ok {
+  flex: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.q.tf .ok:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.q.tf .meta {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+.q.tf .error {
+  display: none;
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 8px;
+  text-align: center;
+}
+.q.tf.invalid .error {
+  display: block;
+}
+
+/* =============================================================================
+   קלטים כלליים
+============================================================================= */
+.label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.req {
+  color: var(--danger);
+}
+.hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  color: var(--text);
+}
+.classic input[type="text"],
+.classic input[type="email"],
+.classic input[type="tel"],
+.classic textarea,
+.classic select {
+  appearance: none;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 12px;
+  font-size: 18px;
+  outline: none;
+  margin-bottom: 10px;
+}
+.classic input:focus,
+.classic textarea:focus,
+.classic select:focus {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+.classic .error {
+  display: none;
+  color: var(--danger);
+  font-size: 13px;
+}
+.classic .invalid .error {
+  display: block;
+}
+
+/* =============================================================================
+   Footer
+============================================================================= */
+.footer {
+  grid-row: 3;
+  position: sticky;
+  bottom: 24px;
+  inset-inline: 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 12px 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.15));
+  max-width: 1080px;
+  margin: 0 auto;
+  width: 100%;
+}
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.footer.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+@media (min-width: 900px) {
+  .footer {
+    bottom: 32px;
+    gap: 14px;
+  }
+}
+
+/* =============================================================================
+   מובייל – overscroll
+============================================================================= */
+@media (hover: none) and (pointer: coarse) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+}
+
+/* =============================================================================
+   Loader
+============================================================================= */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(2px);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#loader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-box {
+  text-align: center;
+}
+.powered {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+.logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  margin: 0 auto 14px;
+  opacity: 0.95;
+}
+.loader {
+  height: 4px;
+  width: 130px;
+  margin: 0 auto;
+  --c: no-repeat linear-gradient(var(--brand, #6100ee) 0 0);
+  background: var(--c), var(--c), #d7b8fc;
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  animation: l16 3s infinite;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+@keyframes l16 {
+  0% {
+    background-position: -150% 0, -150% 0, 0 0;
+  }
+  66% {
+    background-position: 250% 0, -150% 0, 0 0;
+  }
+  100% {
+    background-position: 250% 0, 250% 0, 0 0;
+  }
+}
+
+/* =============================================================================
+   וידאו פתיחה
+============================================================================= */
+.video-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16/9;
+  margin: 20px auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+.video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.video-wrap .overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 18px;
+}
+
+/* =============================================================================
+   רפיטרים (מתחרים/רפרנסים)
+============================================================================= */
+.repeater {
+  display: grid;
+  gap: 10px;
+}
+.rep-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+.rep-row input {
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .rep-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================================
+   תוצאות
+============================================================================= */
+.result-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  max-height: 42vh;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* =============================================================================
+   Popup Styles
+============================================================================= */
+/* שכבת רקע */
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(
+      1200px 800px at 70% 20%,
+      color-mix(in oklab, var(--popup-accent) 30%, transparent),
+      transparent 60%
+    ),
+    rgba(0, 0, 0, 0.55);
+  animation: fadeIn 240ms ease-out;
+}
+/* קופסה – Glassmorphism */
+.popup-content {
+  position: relative;
+  background: var(--popup-bg);
+  color: var(--popup-text);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid var(--popup-border);
+  border-radius: 18px;
+  padding: 28px 26px 26px;
+  width: min(92vw, 420px);
+  box-shadow: var(--popup-shadow);
+  text-align: center;
+  animation: popIn 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+/* פס עליון דקורטיבי */
+.popup-content::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--popup-accent),
+    #a3e635,
+    var(--popup-accent)
+  );
+  opacity: 0.28;
+}
+/* טקסטים */
+.popup-content h2 {
+  margin: 10px 0 6px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.popup-content p {
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.5;
+  font-size: 0.98rem;
+}
+/* אייקון הצלחה */
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 4px auto 12px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: radial-gradient(
+    100% 100% at 50% 0%,
+    color-mix(in oklab, var(--popup-accent) 90%, #fff 0%) 0%,
+    var(--popup-accent) 100%
+  );
+  box-shadow: 0 6px 20px
+      color-mix(in oklab, var(--popup-accent) 45%, transparent),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.25);
+  animation: pulseIn 420ms ease-out;
+}
+.success-icon::before {
+  content: "✔";
+  font-weight: 900;
+  font-size: 30px;
+  transform: translateY(-1px);
+}
+/* כפתור סגירה */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  inset-inline-end: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.2s ease;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: scale(1.04);
+}
+.close-btn:active {
+  transform: scale(0.98);
+}
+/* אנימציות */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes popIn {
+  from {
+    transform: translateY(18px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes pulseIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* נגישות – צמצום תנועה */
+@media (prefers-reduced-motion: reduce) {
+  .popup,
+  .popup-content,
+  .success-icon {
+    animation: none !important;
+  }
+}
+/* מצב בהיר (אופציונלי) */
+@media (prefers-color-scheme: light) {
+  :root {
+    --popup-bg: rgba(255, 255, 255, 0.85);
+    --popup-text: #111827;
+    --popup-border: rgba(0, 0, 0, 0.08);
+    --popup-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
+  }
+}
