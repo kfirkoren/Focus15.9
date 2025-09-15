@@ -209,8 +209,9 @@ function serializeForm() {
 
 // שליחת נתונים לשרת
 async function postToN8N(payload) {
-  const webhookUrl = "https://n8n.scale4u.com/webhook/Details1";
-  // const webhookUrl = 'https://n8n.srv972112.hstgr.cloud/webhook/f7cb8648-a328-484e-825a-c14fa29acbfa';
+  //   const webhookUrl = "https://n8n.scale4u.com/webhook/Details1";
+  const webhookUrl =
+    "https://n8n.srv972112.hstgr.cloud/webhook/f7cb8648-a328-484e-825a-c14fa29acbfa";
   const res = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
